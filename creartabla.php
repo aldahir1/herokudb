@@ -7,16 +7,20 @@ $conexion = pg_connect(
   " dbname=" . substr($datos["path"], 1) . 
   " user=" . $datos["user"] . 
   " password=" . $datos["pass"]);
+
+function getxd($insertar) {
+  $variable = json_decode($_GET[$insertar]);
+  return $variable;
+}
 // preparar consultas
 pg_prepare($conexion, "sql1", 'DROP TABLE IF EXISTS gente');
-pg_prepare($conexion, "sql2", 'CREATE TABLE gente (nombre VARCHAR(30), edad INT)');
-pg_prepare($conexion, "sql3", 'INSERT INTO gente (nombre, edad) VALUES ($1, $2)');
-pg_prepare($conexion, "sql4", 'SELECT * FROM gente');
+pg_prepare($conexion, "sql2", 'CREATE TABLE datosunity (nombre VARCHAR(30), numero INT)');
+pg_prepare($conexion, "sql3", 'INSERT INTO gente (nombre, numero) VALUES ($1, $2)');
+pg_prepare($conexion, "sql4", 'SELECT * FROM datosunity');
 // ejecutar consultas
 pg_execute($conexion, "sql1", array());
 pg_execute($conexion, "sql2", array());
-pg_execute($conexion, "sql3", array("Juan", 23));
-pg_execute($conexion, "sql3", array("El Cacas", 20));
+pg_execute($conexion, "sql3", array(" . $ variable", 23));
 $resultado = pg_execute($conexion, "sql4", array());
 // indicar que el resultado es JSON
 header("Content-type: application/json; charset=utf-8");
@@ -25,7 +29,7 @@ header('Access-Control-Allow-Origin: *');
 // imprimir resultado
 $gente = array();
 while ($fila = pg_fetch_assoc($resultado)) {
-  $fila["edad"] = intval($fila["edad"]);
+  $fila["numero"] = intval($fila["numero"]);
   array_push($gente, $fila);
 }
 echo json_encode($gente);
