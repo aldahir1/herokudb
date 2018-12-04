@@ -18,9 +18,9 @@ pg_prepare($conexion, "sql2", 'CREATE TABLE datosunity (nombre VARCHAR(30), nume
 pg_prepare($conexion, "sql3", 'INSERT INTO gente (nombre, numero) VALUES ($1, $2)');
 pg_prepare($conexion, "sql4", 'SELECT * FROM datosunity');
 // ejecutar consultas
-pg_execute($conexion, "sql1", array());
-pg_execute($conexion, "sql2", array());
-pg_execute($conexion, "sql3", array(" . $ variable", 23));
+//pg_execute($conexion, "sql1", array());
+//pg_execute($conexion, "sql2", array());
+//pg_execute($conexion, "sql3", array(" . $ variable", 23));
 $resultado = pg_execute($conexion, "sql4", array());
 // indicar que el resultado es JSON
 header("Content-type: application/json; charset=utf-8");
