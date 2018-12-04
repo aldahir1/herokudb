@@ -11,9 +11,6 @@ $conexion = pg_connect(
 // preparar consultas
 pg_prepare($conexion, "sql4", 'SELECT * FROM datosunity');
 // ejecutar consultas
-pg_execute($conexion, "sql1", array());
-pg_execute($conexion, "sql2", array());
-pg_execute($conexion, "sql3", array(" . $asdfg . ", 23));
 $resultado = pg_execute($conexion, "sql4", array());
 // indicar que el resultado es JSON
 header("Content-type: application/json; charset=utf-8");
