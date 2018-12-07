@@ -18,8 +18,8 @@ function get1xd($contrasena) {
 $asdfg = getxd("usuario");
 $asddsa = get1xd("contrasena");
 // preparar consultas
-pg_prepare($conexion, "sql3", 'INSERT INTO XerathDatosxd (usuario, contrasena) VALUES ($1, $2)');
-pg_prepare($conexion, "sql4", 'SELECT * FROM XerathDatosxd');
+pg_prepare($conexion, "sql3", 'INSERT INTO WOTDatos1 (usuario, contrasena) VALUES ($1, $2)');
+pg_prepare($conexion, "sql4", 'SELECT * FROM WOTDatos1');
 // ejecutar consultas
 pg_execute($conexion, "sql3", array("$asdfg", "$asddsa"));
 $resultado = pg_execute($conexion, "sql4", array());
@@ -30,7 +30,6 @@ header('Access-Control-Allow-Origin: *');
 // imprimir resultado
 $gente = array();
 while ($fila = pg_fetch_assoc($resultado)) {
-  $fila["usuario"] = intval($fila["usuario"]);
   array_push($gente, $fila);
 }
 echo json_encode($gente);
