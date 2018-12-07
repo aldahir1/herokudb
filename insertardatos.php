@@ -8,21 +8,21 @@ $conexion = pg_connect(
   " user=" . $datos["user"] . 
   " password=" . $datos["pass"]);
 
-function getxd($insertar) {
-  $variable = json_decode($_GET[$insertar]);
+function getxd($jugador) {
+  $variable = json_decode($_GET[$jugador]);
   return $variable;
 }
 
-function get1xd($numeritos) {
-  $variablita = json_decode($_GET[$numeritos]);
+function get1xd($muertes) {
+  $variablita = json_decode($_GET[$muertes]);
   return $variablita;
 }
 
-$asdfg = getxd("insertar");
-$asddsa = get1xd("numeritos");
+$asdfg = getxd("jugador");
+$asddsa = get1xd("muertes");
 // preparar consultas
-pg_prepare($conexion, "sql3", 'INSERT INTO XerathDatos (asesino, muertes) VALUES ($1, $2)');
-pg_prepare($conexion, "sql4", 'SELECT * FROM XerathDatos');
+pg_prepare($conexion, "sql3", 'INSERT INTO WOTDatos (jugador, muertes) VALUES ($1, $2)');
+pg_prepare($conexion, "sql4", 'SELECT * FROM WOTDatos');
 // ejecutar consultas
 pg_execute($conexion, "sql3", array("$asdfg", "$asddsa"));
 $resultado = pg_execute($conexion, "sql4", array());
@@ -33,7 +33,6 @@ header('Access-Control-Allow-Origin: *');
 // imprimir resultado
 $gente = array();
 while ($fila = pg_fetch_assoc($resultado)) {
-  $fila["muertes"] = intval($fila["muertes"]);
   array_push($gente, $fila);
 }
 echo json_encode($gente);
