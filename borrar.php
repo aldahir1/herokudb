@@ -8,8 +8,8 @@ $conexion = pg_connect(
   " user=" . $datos["user"] . 
   " password=" . $datos["pass"]);
 // preparar consultas
-pg_prepare($conexion, "sql1", 'DROP TABLE IF EXISTS XerathDatos');
-pg_prepare($conexion, "sql2", 'DROP TABLE IF EXISTS XerathDatosxd');
+pg_prepare($conexion, "sql1", 'DROP TABLE IF EXISTS WOTDatos');
+pg_prepare($conexion, "sql2", 'DROP TABLE IF EXISTS WOTDatos1');
 // ejecutar consultas
 pg_execute($conexion, "sql1", array());
 pg_execute($conexion, "sql2", array());
