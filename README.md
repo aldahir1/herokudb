@@ -1,2 +1,0 @@
-# herokudb
-alaa xd
